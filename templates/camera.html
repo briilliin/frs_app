@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="Display Webcam Stream" name="title">
+    <title>Display Webcam Stream</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f3f3f3;
+        }
+
+        h1 {
+            color: #666;
+        }
+
+        #container {
+            width: 500px;
+            height: 375px;
+        }
+
+        #videoElement {
+            width: 500px;
+            height: 375px;
+            background-color: #857987;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            margin: 0 10px;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 0;
+            width: 200px;
+            background-color: #EFEEFF;
+            border-radius: 20px;
+            border-color: #EFEEFF;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(150, 98, 195);
+        }
+
+        button:active {
+            background-color: rgb(143, 14, 169);
+        }
+
+        #imageURL {
+            margin-top: 20px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h1>Сделать фотографию</h1>
+<div id="container">
+    <video autoplay id="videoElement"></video>
+</div>
+<div class="button-container">
+    <button id="stop">Остановить</button>
+    <button id="start">Начать</button>
+    <form action="/take_photo" method="post">
+        <input type="hidden" name="imageURL" value="">
+        <button type="submit" onclick="updateImageURL()">Сделать фото</button>
+    </form>
+</div>
+<div id="imageURL"></div>
+
+
+<script>
+    var video = document.querySelector("#videoElement");
+    var stopVideo = document.querySelector("#stop");
+    var startVideo = document.querySelector("#start");
+    var snapshotButton = document.querySelector("#snapshot");
+    var imageURLDiv = document.querySelector("#imageURL");
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+
+    stopVideo.addEventListener("click", stop, false);
+    startVideo.addEventListener("click", startWebCam, false);
+    snapshotButton.addEventListener("click", takeSnapshot, false);
+
+    function startWebCam() {
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log("Something went wrong: " + error);
+                });
+        }
+    }
+
+    function stop(e) {
+        var stream = video.srcObject;
+        var tracks = stream.getTracks();
+
+        for (var i = 0; i < tracks.length; i++) {
+            var track = tracks[i];
+            track.stop();
+        }
+
+        video.srcObject = null;
+    }
+
+    function takeSnapshot() {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Получаем URL-адрес изображения
+        var imageURL = canvas.toDataURL("image/png");
+        //передать url
+
+
+        imageURLDiv.textContent = "URL изображения: " + imageURL;
+    }
+
+    function updateImageURL() {
+        var imageURL = canvas.toDataURL("image/png");
+        document.querySelector('input[name="imageURL"]').value = imageURL;
+    }
+
+
+</script>
+</script>
+</body>
+</html>

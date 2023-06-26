@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>Документ без названия</title>
+    <style>
+        #glaw {
+            display: inline;
+            width: 880px;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 30px;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            display: inline;
+            margin-right: 40px; /* Увеличение отступа между пунктами меню */
+        }
+
+        .menu li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        a {
+            color: #080710;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .blok4 {
+            float: left;
+            background: #EFEEFF;
+            width: 570px;
+            height: 900px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* input[type=text] {
+          padding:10px;
+          border:0;
+          width:250px;
+          height: 30px;
+          box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+        } */
+        form {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(15%, -45%);
+            top: 50%;
+            left: 50%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+            padding: 50px 35px;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            color: rgba(8, 7, 16, 0.6);
+        }
+
+        label {
+            display: block;
+            margin-top: 3px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 400px;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 380px;
+            background-color: rgba(212, 208, 208, 0.539);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        select {
+            display: block;
+            height: 50px;
+            width: 400px;
+            color: #3e3e3ec5;
+            background-color: rgba(212, 208, 208, 0.539);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 2px;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #3e3e3ec5;
+            font-size: 18px;
+            width: 400px;
+        }
+
+        button {
+            margin-top: 85px;
+            width: 100%;
+            background-color: #EFEEFF;
+            color: #080710;
+            padding: 15px 0;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tree {
+            --spacing: 1.5rem;
+            --radius: 10px;
+        }
+
+        .tree li {
+            display: block;
+            position: relative;
+            padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+            font-size: 25px;
+        }
+
+        .tree ul {
+            margin-left: calc(var(--radius) - var(--spacing));
+            padding-left: 0;
+        }
+
+        .tree ul li {
+            border-left: 2px solid #ddd;
+            font-size: 25px;
+        }
+
+        .tree ul li:last-child {
+            border-color: transparent;
+        }
+
+        .tree ul li::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: calc(var(--spacing) / -2);
+            left: -2px;
+            width: calc(var(--spacing) + 2px);
+            height: calc(var(--spacing) + 1px);
+            border: solid #ddd;
+            border-width: 0 0 2px 2px;
+        }
+
+        .tree summary {
+            display: block;
+            cursor: pointer;
+        }
+
+        .tree summary::marker,
+        .tree summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .tree summary:focus {
+            outline: none;
+        }
+
+        .tree summary:focus-visible {
+            outline: 1px dotted #000;
+        }
+
+        .tree li::after,
+        .tree summary::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: calc(var(--spacing) / 2 - var(--radius));
+            left: calc(var(--spacing) - var(--radius) - 1px);
+            width: calc(2 * var(--radius));
+            height: calc(2 * var(--radius));
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .tree summary::before {
+            content: '+';
+            z-index: 1;
+            background: rgb(73, 6, 128);
+            color: #fff;
+            line-height: calc(2 * var(--radius) - 2px);
+            text-align: center;
+        }
+
+        .tree details[open] > summary::before {
+            content: '−';
+        }
+
+    </style>
+</head>
+<body>
+<header class="header">
+    <ul class="menu">
+        <li><a href="4.html">Лица</a></li>
+        <li><a href="#">Распознать</a></li>
+    </ul>
+</header>
+
+<div id="glaw">
+
+    <div class="blok4">
+        <ul class="tree">
+            <li>
+                <details open>
+                    <summary>Планеты гиганты</summary>
+                    <ul>
+
+                        <li>
+                            <details>
+                                <summary>1</summary>
+                                <ul>
+                                    {% for i in data %}
+                                        {% if i.group == 6 %}
+                                            <li>{{ i }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                        </li>
+
+                        <li>
+                            <details>
+                                <summary>Ледяные</summary>
+                                <ul>
+                                    <li>Уран</li>
+                                    <li>Нептун</li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+
+    </div>
+    <form method="POST">
+
+        <h3>Зарегистрируйтесь</h3>
+
+        <p><label for="username">Username</label>
+            <input type="text" placeholder="Имя" name="name">
+        </p>
+
+        <p><label for="username">Username</label>
+            <input type="text" placeholder="Фамилия" name="surname">
+        </p>
+
+        <p><label for="username">Username</label>
+            <input type="text" placeholder="Email or Phone" name="middle_name">
+        </p>
+
+        {#        <label for="name">name</label>#}
+        {#        <input type="name" placeholder="Имя" id="name">#}
+        {##}
+        {#        <label for="surname">surname</label>#}
+        {#        <input type="surname" placeholder="Фамилия" id="surname">#}
+        {##}
+        {#        <label for="middle_name">middle_name</label>#}
+        {#        <input type="middle_name" placeholder="Отчество" id="middle_name">#}
+
+        <label for="group">Select Option</label>
+        <select name="group">
+            <option value='1'>Группа 1</option>
+            <option value='2'>Группа 2</option>
+            <option value='3'>Группа 3</option>
+            <option value='4'>Группа 4</option>
+            <option value='5'>Группа 5</option>
+            <option value='6'>Группа 6</option>
+        </select>
+        <form action="/take_photo">
+            <button type="submit" formaction="/take_photo">Сделать фото</button>
+        </form>
+
+
+    </form>
+</div>
+</body>
+</html>

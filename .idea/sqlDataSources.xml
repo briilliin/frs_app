@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="b8836775-63c1-4436-8396-805851020986" name="postgres@localhost Mapping">
+      <data-sources db="eafca6f3-ec09-471e-86c5-7f2b59c1231c" />
+    </mapping>
+  </component>
+</project>
