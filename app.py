@@ -16,6 +16,7 @@ host = "localhost"
 port = "5432"
 
 
+# Функция стримит видеопоток
 def gen_frames():  # generate frame by frame from camera
     camera = cv2.VideoCapture(0)
     while True:
@@ -46,12 +47,15 @@ def hello_world():
         return render_template('index.html')
 
 
+# Получение кадра со страницы
 @app.route('/take_photo', methods=['POST', 'GET'])
 def take_photo():
 
     print(request.form.get('imageURL'))
     return render_template("camera.html")
 
+# Регистрация видеопотока в FRS, используется в кнопке "Регистрация видео"
+# streamId - номер потока, url - адрес по которому идёт стрим видео, callback - вызывается если на видео обнаружено лицо
 @app.route('/add_stream')
 def add_stream():
     payload = dict(streamId='1', url='http://127.0.0.1:5000/video_feed', callback="http://127.0.0.1:5000/faceRecognized")
@@ -60,11 +64,13 @@ def add_stream():
     print(payload)
     return Response(r)
 
+# Апи возвращает поток видео с веб-камеры
 @app.route('/video_feed')
 def video_feed():
     #Video streaming route. Put this in the src attribute of an img tag
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# Апи возвращает фото из папки проекта/static/1.jpg
 @app.route('/photo_feed',methods=['GET'])
 def photo_feed():
     name = '1.jpg'
@@ -73,11 +79,13 @@ def photo_feed():
         dir, name
     )
 
+# Апи которое передаём в callback 
 @app.route('/faceRecognized')
 def face_recognized():
     print("ЛИЦО РАСПОЗНАНО")
     return 0
 
+# Функция передаёт тестовое фото в FRS на регистрацию, используется в кнопке "Сделать фото" 
 @app.route('/capture', methods=['POST', 'GET'])
 def capture():
     # imageulr='https://i.ytimg.com/vi/lqYKkloAWMc/maxresdefault.jpg'
