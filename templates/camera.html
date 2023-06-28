@@ -69,14 +69,20 @@
     <video autoplay id="videoElement"></video>
 </div>
 <div class="button-container">
+    <form action="/add_stream" method="get">
+        <input type="hidden">
+        <button type="submit">Регистрация видео</button>
+    </form>
     <button id="stop">Остановить</button>
     <button id="start">Начать</button>
-    <form action="/take_photo" method="post">
+    <form action="/capture" method="post">
         <input type="hidden" name="imageURL" value="">
         <button type="submit" onclick="updateImageURL()">Сделать фото</button>
     </form>
 </div>
 <div id="imageURL"></div>
+
+<img src="/static/1.jpg">
 
 
 <script>
@@ -130,6 +136,11 @@
     }
 
     function updateImageURL() {
+        var imageURL = canvas.toDataURL("image/png");
+        document.querySelector('input[name="imageURL"]').value = imageURL;
+    }
+
+    function addStream() {
         var imageURL = canvas.toDataURL("image/png");
         document.querySelector('input[name="imageURL"]').value = imageURL;
     }
